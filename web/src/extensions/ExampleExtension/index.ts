@@ -1,6 +1,9 @@
 import { DEFAULT_PRIORITY, type Extension } from "../../lib/extensions";
 import AboutSection from "./settings/AboutSection";
 
+// Uncomment below import to enable custom sidebar UI
+// import CustomSidebarContent from "./sidebarUI/CustomSidebarContent";
+
 // Uncomment below imports to enable custom chat UI
 // import CustomAssistantAvatar from "./chatUI/CustomAssistantAvatar";
 // import CustomChatTopContent from "./chatUI/CustomChatTopContent";
@@ -18,6 +21,11 @@ export const activate: Extension["activate"] = (ctx) => {
 		component: AboutSection,
 	});
 
+	// Uncomment below to enable custom sidebar UI (replaces default tabbed sidebar)
+	// ctx.sidebarUI.configure({
+	// 	SidebarContent: CustomSidebarContent,
+	// });
+
 	// Uncomment below to enable custom chat UI (avatars, input bar, empty state, etc.)
 	// ctx.chatUI.configure({
 	// 	UserAvatar: CustomUserAvatar,
@@ -28,4 +36,18 @@ export const activate: Extension["activate"] = (ctx) => {
 	// 	ModeSelector: null,
 	// 	StopButton: null,
 	// });
+
+	// Uncomment below to register a custom theme
+	// ctx.theme.register(
+	// 	"my-theme",
+	// 	{
+	// 		label: "My Theme",
+	// 		description: "Custom theme example",
+	// 		accent: { light: "#0ea5e9", dark: "#7dd3fc" },
+	// 		bg: { light: "#f8fafc", dark: "#0c1929" },
+	// 		text: { light: "#0c1929", dark: "#f0f9ff" },
+	// 		textMuted: { light: "#64748b", dark: "#94a3b8" },
+	// 	},
+	// 	`.theme-my-theme { --th-accent: #0ea5e9; }`,
+	// );
 };
