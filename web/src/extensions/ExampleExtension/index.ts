@@ -4,6 +4,9 @@ import AboutSection from "./settings/AboutSection";
 // Uncomment below import to enable custom sidebar UI
 // import CustomSidebarContent from "./sidebarUI/CustomSidebarContent";
 
+// Uncomment below import to enable custom header UI
+// import CustomHeader from "./headerUI/CustomHeader";
+
 // Uncomment below imports to enable custom chat UI
 // import CustomAssistantAvatar from "./chatUI/CustomAssistantAvatar";
 // import CustomChatTopContent from "./chatUI/CustomChatTopContent";
@@ -20,6 +23,11 @@ export const activate: Extension["activate"] = (ctx) => {
 		priority: DEFAULT_PRIORITY + 100,
 		component: AboutSection,
 	});
+
+	// Uncomment below to enable custom header UI (replaces default header)
+	// ctx.headerUI.configure({
+	// 	HeaderContent: CustomHeader,
+	// });
 
 	// Uncomment below to enable custom sidebar UI (replaces default tabbed sidebar)
 	// ctx.sidebarUI.configure({
