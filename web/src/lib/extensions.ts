@@ -4,6 +4,11 @@ import {
 	setChatUIConfig,
 } from "./registries/chatUIRegistry";
 import {
+	type HeaderUIConfig,
+	resetHeaderUIConfig,
+	setHeaderUIConfig,
+} from "./registries/headerUIRegistry";
+import {
 	DEFAULT_PRIORITY,
 	registerSettingsSection,
 	type SettingsSectionConfig,
@@ -28,6 +33,9 @@ export interface ExtensionContext {
 	};
 	readonly sidebarUI: {
 		configure(config: Partial<SidebarUIConfig>): void;
+	};
+	readonly headerUI: {
+		configure(config: Partial<HeaderUIConfig>): void;
 	};
 }
 
@@ -65,6 +73,12 @@ function createContext(extensionId: string): InternalContext {
 			configure(config) {
 				setSidebarUIConfig(config);
 				disposables.push(() => resetSidebarUIConfig());
+			},
+		},
+		headerUI: {
+			configure(config) {
+				setHeaderUIConfig(config);
+				disposables.push(() => resetHeaderUIConfig());
 			},
 		},
 		dispose() {

@@ -8,6 +8,10 @@ import {
 } from "./extensions";
 import { resetChatUIConfig } from "./registries/chatUIRegistry";
 import {
+	getHeaderUIConfig,
+	resetHeaderUIConfig,
+} from "./registries/headerUIRegistry";
+import {
 	getSettingsSections,
 	resetSettingsSections,
 } from "./registries/settingsRegistry";
@@ -28,6 +32,7 @@ describe("extensions", () => {
 		resetSettingsSections();
 		resetChatUIConfig();
 		resetSidebarUIConfig();
+		resetHeaderUIConfig();
 	});
 
 	describe("loadExtension", () => {
@@ -104,6 +109,23 @@ describe("extensions", () => {
 			unloadExtension("test");
 
 			expect(getSidebarUIConfig().SidebarContent).toBeUndefined();
+		});
+
+		it("cleans up headerUI config", () => {
+			const Component = () => null;
+			loadExtension(
+				createExtension({
+					activate: (ctx) => {
+						ctx.headerUI.configure({ HeaderContent: Component });
+					},
+				}),
+			);
+
+			expect(getHeaderUIConfig().HeaderContent).toBe(Component);
+
+			unloadExtension("test");
+
+			expect(getHeaderUIConfig().HeaderContent).toBeUndefined();
 		});
 
 		it("returns false for non-existent extension", () => {
